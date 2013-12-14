@@ -1,0 +1,17 @@
+CCDA Syllabus
+Course Syllabus
+Week 1. Intro: Examples of data and data analysis problems; visualization.       
+                     
+Week 2. 1D analysis. Feature scales. Histogram. Two common types of histograms: Gaussian and Power Law. Central values. Minkowski distance and data recovery view. Validation with Bootstrap.           
+                       
+Week 3-4. 2D analysis cases:
+(Both quantitative: Scatter-plot, linear regression, correlation and determinacy coefficients: meaning and properties. Both nominal: Contingency table, Quetelet index, Pearson chi-squared coefficient, its double meaning and visualization).                                                              
+Week 5-6. Learning multivariate correlations
+(Bayes approach and Naïve Bayes classifier with a Bag-of-words text model; Decision trees and criteria for building them.)                      
+                       
+Week 7. Principal components (PCA) and SVD
+(SVD model behind PCA: student marks as the product of subject factor scores and subject loadings. Application to deriving a hidden underlying factor. Data visualization with PCA. Conventional PCA and data normalization issues.)
+ 
+Week 8. Clustering with k-means
+(K-Means iterations and K-Means features   
+K-Means criterion. Anomalous clusters and intelligent K-Means.)
