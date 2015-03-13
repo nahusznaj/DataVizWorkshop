@@ -1,0 +1,21 @@
+# 1) Create a simple numeric vector
+# 2) Create a sequence using the semi colon operator
+# 3) Recycling with Vectors
+
+#########################################
+# 1) Create a simple numeric vector
+
+X <- c(1,5,5,7,8)
+
+Y <- c(4,6,3,4,1)
+
+X+Y  # casewise addition
+
+X*Y  # casewise multiplication
+
+
+#########################################
+
+z <- 1:5   # sequence of integers. simply specify upper and lower bounds.
+
+#########################################
