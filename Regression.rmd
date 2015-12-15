@@ -1,5 +1,0 @@
-Regression
-============
-
-Week 7: Unit 6 - Simple linear regression
-Week 8: Unit 7 - Multiple linear regression
