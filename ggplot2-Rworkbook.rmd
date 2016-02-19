@@ -1,0 +1,22 @@
+```{r}
+summary(newdata3)
+
+```
+
+```{r}
+ggplot(newdata3, aes(x = gre, y = PredictedProb)) +
+  geom_ribbon(aes(ymin = LL, ymax = UL, fill = rank), alpha = .2) +
+  geom_line(aes(colour = rank), size=1)
+```
+
+```{r}
+## melt data set to long for ggplot2
+lpp <- melt(pp.write, id.vars = c("ses", "write"), value.name = "probability")
+head(lpp) # view first few rows
+```
+
+```{r}
+ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
+  geom_line() +
+  facet_grid(variable ~ ., scales="free")
+```
