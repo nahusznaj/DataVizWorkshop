@@ -54,3 +54,9 @@ ggplot(lnewdat, aes(x = gpa, y = Probability, colour = Level)) +
   facet_grid(pared ~ public, scales="free",
     labeller=function(x, y) sprintf("%s = %d", x, y))
 ```
+#### Poisson Regression
+
+```{r}
+ggplot(p, aes(num_awards, fill = prog)) +
+  geom_histogram(binwidth=.5, position="dodge")
+```
