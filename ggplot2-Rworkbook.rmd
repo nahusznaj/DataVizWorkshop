@@ -20,3 +20,13 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
   geom_line() +
   facet_grid(variable ~ ., scales="free")
 ```
+
+#### Ordinal Logistic Regression
+
+```{r}
+ggplot(dat, aes(x = apply, y = gpa)) +
+  geom_boxplot(size = .75) +
+  geom_jitter(alpha = .5) +
+  facet_grid(pared ~ public, margins = TRUE) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+```
