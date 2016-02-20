@@ -20,8 +20,11 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
   geom_line() +
   facet_grid(variable ~ ., scales="free")
 ```
+<!------------------------------------------------------------->
 
 #### Ordinal Logistic Regression
+
+A study looks at factors that influence the decision of whether to apply to graduate school. College juniors are asked if they are unlikely, somewhat likely, or very likely to apply to graduate school. Hence, our outcome variable has three categories. Data on parental educational status, whether the undergraduate institution is public or private, and current GPA is also collected. The researchers have reason to believe that the "distances" between these three points are not equal. For example, the "distance" between "unlikely" and "somewhat likely" may be shorter than the distance between "somewhat likely" and "very likely".
 
 ```{r}
 ggplot(dat, aes(x = apply, y = gpa)) +
@@ -29,4 +32,25 @@ ggplot(dat, aes(x = apply, y = gpa)) +
   geom_jitter(alpha = .5) +
   facet_grid(pared ~ public, margins = TRUE) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+```
+```{r}
+lnewdat <- melt(newdat, id.vars = c("pared", "public", "gpa"),
+  variable.name = "Level", value.name="Probability")
+## view first few rows
+```
+```{r}
+head(lnewdat)
+##   pared public   gpa    Level Probability
+## 1     0      0 1.900 unlikely      0.7376
+## 2     1      0 1.921 unlikely      0.4932
+## 3     0      0 1.942 unlikely      0.7325
+## 4     1      0 1.964 unlikely      0.4867
+## 5     0      0 1.985 unlikely      0.7274
+## 6     1      0 2.006 unlikely      0.4802
+```
+```{r}
+ggplot(lnewdat, aes(x = gpa, y = Probability, colour = Level)) +
+  geom_line() +
+  facet_grid(pared ~ public, scales="free",
+    labeller=function(x, y) sprintf("%s = %d", x, y))
 ```
