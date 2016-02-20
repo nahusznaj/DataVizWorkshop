@@ -76,3 +76,22 @@ ggplot(p, aes(x = math, y = phat, colour = prog)) +
   labs(x = "Math Score", y = "Expected number of awards")
   
 ```
+
+#### Interval Regression
+
+We wish to predict GPA from teacher ratings of effort, writing test scores and the type of program in which the student was enrolled (vocational, general or academic). The measure of GPA is a self-report response to the following item:
+
+<pre><code>
+Select the category that best represents your overall GPA.
+  0.0 to 2.0
+  2.0 to 2.5
+  2.5 to 3.0
+  3.0 to 3.4
+  3.4 to 3.8
+  3.8 to 4.0
+  
+</code></pre>  
+```{r}`
+# bivariate plots
+ggpairs(dat[, -1], lower = list(combo = "box"), upper = list(combo = "blank"))
+```
