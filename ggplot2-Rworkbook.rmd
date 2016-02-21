@@ -97,25 +97,6 @@ ggplot(p, aes(x = math, y = phat, colour = prog)) +
   
 ```
 
-#### Interval Regression
-
-We wish to predict GPA from teacher ratings of effort, writing test scores and the type of program in which the student was enrolled (vocational, general or academic). The measure of GPA is a self-report response to the following item:
-
-<pre><code>
-Select the category that best represents your overall GPA.
-  0.0 to 2.0
-  2.0 to 2.5
-  2.5 to 3.0
-  3.0 to 3.4
-  3.4 to 3.8
-  3.8 to 4.0
-  
-</code></pre>  
-
-```{r}
-# bivariate plots
-ggpairs(dat[, -1], lower = list(combo = "box"), upper = list(combo = "blank"))
-```
 #### Negative Binomial Models
 
 School administrators study the attendance behavior of high school juniors at two schools. Predictors of the number of days of absence include the type of program in which the student is enrolled and a standardized test in math.
@@ -127,6 +108,57 @@ ggplot(dat, aes(daysabs, fill = prog)) +
   geom_histogram(binwidth=1) +
   facet_grid(prog ~ ., margins=TRUE, scales="free")
 ```  
+#### Zero - Inflated Poisson Models
+
+```{r}
+## histogram with x axis in log10 scale
+ggplot(zinb, aes(count)) + geom_histogram() + scale_x_log10()
+```
+
+```{r}
+newdata1 <- expand.grid(0:3, factor(0:1), 1:4)
+colnames(newdata1) <- c("child", "camper", "persons")
+newdata1 <- subset(newdata1, subset=(child<=persons))
+newdata1$phat <- predict(m1, newdata1)
+
+ggplot(newdata1, aes(x = child, y = phat, colour = factor(persons))) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~camper) +
+  labs(x = "Number of Children", y = "Predicted Fish Caught")
+```
+```{r}
+zinb <- read.csv("http://www.ats.ucla.edu/stat/data/fish.csv")
+zinb <- within(zinb, {
+  nofish <- factor(nofish)
+  livebait <- factor(livebait)
+  camper <- factor(camper)
+})
+```
+<pre><code>
+summary(zinb)
+##  nofish  livebait camper     persons         child             xb        
+##  0:176   0: 34    0:103   Min.   :1.00   Min.   :0.000   Min.   :-3.275  
+##  1: 74   1:216    1:147   1st Qu.:2.00   1st Qu.:0.000   1st Qu.: 0.008  
+##                           Median :2.00   Median :0.000   Median : 0.955  
+##                           Mean   :2.53   Mean   :0.684   Mean   : 0.974  
+##                           3rd Qu.:4.00   3rd Qu.:1.000   3rd Qu.: 1.964  
+##                           Max.   :4.00   Max.   :3.000   Max.   : 5.353  
+##        zg             count      
+##  Min.   :-5.626   Min.   :  0.0  
+##  1st Qu.:-1.253   1st Qu.:  0.0  
+##  Median : 0.605   Median :  0.0  
+##  Mean   : 0.252   Mean   :  3.3  
+##  3rd Qu.: 1.993   3rd Qu.:  2.0  
+##  Max.   : 4.263   Max.   :149.0
+## histogram with x axis in log10 scale
+</code></pre>
+```{r}
+ggplot(zinb, aes(count, fill = camper)) +
+  geom_histogram() +
+  scale_x_log10() +
+  facet_grid(camper ~ ., margins=TRUE, scales="free_y")
+```
   
 #### Zero Truncated Negative Binomial Models
 
@@ -177,4 +209,52 @@ p + stat_bin(binwidth = 1) + stat_function(fun = f, size = 1, args = list(var = 
     bw = 1))
 # plot matrix
 ggpairs(dat[, c("read", "math", "apt")])
+```
+#### Truncated Regression
+
+A study of students in a special GATE (gifted and talented education) program wishes to model achievement as a function of language skills and the type of program in which the student is currently enrolled. A major concern is that students are required to have a minimum achievement score of 40 to enter the special program. Thus, the sample is truncated at an achievement score of 40.
+
+
+```{r}
+dat <- read.dta("http://www.ats.ucla.edu/stat/data/truncreg.dta")
+
+summary(dat)
+##        id            achiv        langscore          prog    
+##  Min.   :  3.0   Min.   :41.0   Min.   :31.0   general : 40  
+##  1st Qu.: 55.2   1st Qu.:47.0   1st Qu.:47.5   academic:101  
+##  Median :102.5   Median :52.0   Median :56.0   vocation: 37  
+##  Mean   :103.6   Mean   :54.2   Mean   :54.0                 
+##  3rd Qu.:151.8   3rd Qu.:63.0   3rd Qu.:61.8                 
+##  Max.   :200.0   Max.   :76.0   Max.   :67.0
+# histogram of achiv coloured by program type
+ggplot(dat, aes(achiv, fill = prog)) +
+  geom_histogram(binwidth=3)
+```  
+
+```{r}
+# boxplot of achiv by program type
+ggplot(dat, aes(prog, achiv)) +
+  geom_boxplot() +
+  geom_jitter()
+```  
+
+
+#### Interval Regression
+
+We wish to predict GPA from teacher ratings of effort, writing test scores and the type of program in which the student was enrolled (vocational, general or academic). The measure of GPA is a self-report response to the following item:
+
+<pre><code>
+Select the category that best represents your overall GPA.
+  0.0 to 2.0
+  2.0 to 2.5
+  2.5 to 3.0
+  3.0 to 3.4
+  3.4 to 3.8
+  3.8 to 4.0
+  
+</code></pre>  
+
+```{r}
+# bivariate plots
+ggpairs(dat[, -1], lower = list(combo = "box"), upper = list(combo = "blank"))
 ```
