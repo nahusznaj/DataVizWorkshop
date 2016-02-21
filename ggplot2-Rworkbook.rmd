@@ -91,10 +91,23 @@ Select the category that best represents your overall GPA.
   3.8 to 4.0
   
 </code></pre>  
-```{r}`
+
+```{r}
 # bivariate plots
 ggpairs(dat[, -1], lower = list(combo = "box"), upper = list(combo = "blank"))
 ```
+#### Negative Binomial Models
+
+School administrators study the attendance behavior of high school juniors at two schools. Predictors of the number of days of absence include the type of program in which the student is enrolled and a standardized test in math.
+
+We have attendance data on 314 high school juniors from two urban high schools in the file nb_data. The response variable of interest is days absent, daysabs. The variable math gives the standardized math score for each student. The variable prog is a three-level nominal variable indicating the type of instructional program in which the student is enrolled.
+
+```{r}
+ggplot(dat, aes(daysabs, fill = prog)) +
+  geom_histogram(binwidth=1) +
+  facet_grid(prog ~ ., margins=TRUE, scales="free")
+```  
+  
 #### Zero Truncated Negative Binomial Models
 
 ```{r}
