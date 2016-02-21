@@ -28,6 +28,20 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
 ```
 <!------------------------------------------------------------->
 
+
+#### Multinomial Logistic Regression
+
+Entering high school students make program choices among general program, vocational program and academic program. Their choice might be modeled using their writing score and their social economic status.
+
+```{r}
+## plot predicted probabilities across write values for
+## each level of ses facetted by program type
+
+ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
+  geom_line() +
+  facet_grid(variable ~ ., scales="free")
+```
+
 #### Ordinal Logistic Regression
 
 A study looks at factors that influence the decision of whether to apply to graduate school. College juniors are asked if they are unlikely, somewhat likely, or very likely to apply to graduate school. Hence, our outcome variable has three categories. Data on parental educational status, whether the undergraduate institution is public or private, and current GPA is also collected. The researchers have reason to believe that the "distances" between these three points are not equal. For example, the "distance" between "unlikely" and "somewhat likely" may be shorter than the distance between "somewhat likely" and "very likely".
