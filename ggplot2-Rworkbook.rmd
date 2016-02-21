@@ -162,6 +162,23 @@ ggplot(zinb, aes(count, fill = camper)) +
   
 #### Zero Truncated Negative Binomial Models
 
+A study of length of hospital stay, in days, as a function of age, kind of health insurance and whether or not the patient died while in the hospital. Length of hospital stay is recorded as a minimum of at least one day. The study consists of 1,493 observations. 
+
+The length of hospital stay variable is ***stay***. The variable ***age*** gives the age group from 1 to 9 which will be treated as interval in this example. The variables ***hmo*** and ***died*** are binary indicator variables for HMO insured patients and patients who died while in the hospital, respectively.
+
+```{r}
+ggplot(dat, aes(stay)) + geom_histogram() + scale_x_log10() + facet_grid(hmo ~ 
+    died, margins = TRUE, scales = "free_y")
+```
+
+```{r}
+ggplot(dat, aes(factor(age), stay)) +
+  geom_violin() +
+  geom_jitter(size=1.5) +
+  scale_y_log10() +
+  stat_smooth(aes(x = age, y = stay, group=1), method="loess")
+```
+
 ```{r}
 output <- data.frame(resid = resid(m1)[, 1], fitted = fitted(m1))
 ggplot(output, aes(fitted, resid)) + geom_jitter(position = position_jitter(width = 0.25), 
