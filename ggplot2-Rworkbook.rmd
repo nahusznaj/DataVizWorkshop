@@ -1,7 +1,20 @@
-#### Logistic Regression
-A researcher is interested in how variables, such as GRE (Graduate Record Exam scores), GPA (grade point average) and prestige of the undergraduate institution, effect admission into graduate school. The response variable, admit/don't admit, is a binary variable.
+1. Logistic Regression
+2. Multinomial Logistic Regression
+3. Ordinal Logistic Regression
+4. Poisson Regression
+5. Negative Binomial Models
+6. Zero - Inflated Poisson Models
+7. Zero - Inflated Negative Binomial Models
+8. Tobit Regression
+9. Truncated Regression
+10. Interval Regression
 
-This dataset has a binary response (outcome, dependent) variable called ***admit***. There are three predictor variables: ***gre***, ***gpa*** and ***rank***. We will treat the variables gre and gpa as continuous. The variable rank takes on the values 1 through 4. Institutions with a rank of 1 have the highest prestige, while those with a rank of 4 have the lowest. We can get basic descriptives for the entire data set by using summary. 
+<!-------------------------------------------------------------------->
+
+#### 1. Logistic Regression
+A researcher is interested in how variables, such as ***GRE*** (Graduate Record Exam scores), ***GPA*** (grade point average) and prestige of the undergraduate institution, effect admission into graduate school. The response variable, ***admit/don't admit***, is a binary variable.
+
+This dataset has a binary response (outcome, dependent) variable called ***admit***. There are three predictor variables: ***gre***, ***gpa*** and ***rank***. We will treat the variables gre and gpa as continuous. The variable rank takes on the values 1 through 4. Institutions with a rank of 1 have the highest prestige, while those with a rank of 4 have the lowest. We can get basic descriptives for the entire data set by using `summary`. 
 
 To get the standard deviations, we use sapply to apply the sd function to each variable in the dataset.
 ```{r}
@@ -29,7 +42,7 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
 <!------------------------------------------------------------->
 
 
-#### Multinomial Logistic Regression
+#### 2. Multinomial Logistic Regression
 
 Entering high school students make program choices among general program, vocational program and academic program. Their choice might be modeled using their writing score and their social economic status.
 
@@ -42,7 +55,10 @@ ggplot(lpp, aes(x = write, y = probability, colour = ses)) +
   facet_grid(variable ~ ., scales="free")
 ```
 
-#### Ordinal Logistic Regression
+<!------------------------------------------------------------->
+
+
+#### 3. Ordinal Logistic Regression
 
 A study looks at factors that influence the decision of whether to apply to graduate school. College juniors are asked if they are unlikely, somewhat likely, or very likely to apply to graduate school. Hence, our outcome variable has three categories. Data on parental educational status, whether the undergraduate institution is public or private, and current GPA is also collected. The researchers have reason to believe that the "distances" between these three points are not equal. For example, the "distance" between "unlikely" and "somewhat likely" may be shorter than the distance between "somewhat likely" and "very likely".
 
@@ -74,7 +90,8 @@ ggplot(lnewdat, aes(x = gpa, y = Probability, colour = Level)) +
   facet_grid(pared ~ public, scales="free",
     labeller=function(x, y) sprintf("%s = %d", x, y))
 ```
-#### Poisson Regression
+<!------------------------------------------------------------->
+#### 4. Poisson Regression
 
 In this example, `num_awards` is the outcome variable and indicates the number of awards earned by students at a high school in a year, math is a continuous predictor variable and represents students' scores on their math final exam, and prog is a categorical predictor variable with three levels indicating the type of program in which the students were enrolled. It is coded as 1 = "General", 2 = "Academic" and 3 = "Vocational". 
 
@@ -96,8 +113,8 @@ ggplot(p, aes(x = math, y = phat, colour = prog)) +
   labs(x = "Math Score", y = "Expected number of awards")
   
 ```
-
-#### Negative Binomial Models
+<!------------------------------------------------------------->
+#### 5. Negative Binomial Models
 
 School administrators study the attendance behavior of high school juniors at two schools. Predictors of the number of days of absence include the type of program in which the student is enrolled and a standardized test in math.
 
@@ -108,7 +125,15 @@ ggplot(dat, aes(daysabs, fill = prog)) +
   geom_histogram(binwidth=1) +
   facet_grid(prog ~ ., margins=TRUE, scales="free")
 ```  
-#### Zero - Inflated Poisson Models
+<!------------------------------------------------------------->
+
+#### 6. Zero-Inflated Poisson Models
+
+The state wildlife biologists want to model how many fish are being caught by fishermen at a state park. Visitors are asked how long they stayed, how many people were in the group, were there children in the group and how many fish were caught. Some visitors do not fish, but there is no data on whether a person fished or not. Some visitors who did fish did not catch any fish so there are excess zeros in the data because of the people that did not fish.
+
+We have data on 250 groups that went to a park. Each group was questioned about how many fish they caught (count), how many children were in the group (child), how many people were in the group (persons), and whether or not they brought a camper to the park (camper).
+
+In addition to predicting the number of fish caught, there is interest in predicting the existence of excess zeros, i.e., the probability that a group caught zero fish. We will use the variables child, persons, and camper in our model.
 
 ```{r}
 ## histogram with x axis in log10 scale
@@ -120,7 +145,9 @@ newdata1 <- expand.grid(0:3, factor(0:1), 1:4)
 colnames(newdata1) <- c("child", "camper", "persons")
 newdata1 <- subset(newdata1, subset=(child<=persons))
 newdata1$phat <- predict(m1, newdata1)
+```
 
+```{r}
 ggplot(newdata1, aes(x = child, y = phat, colour = factor(persons))) +
   geom_point() +
   geom_line() +
@@ -160,7 +187,7 @@ ggplot(zinb, aes(count, fill = camper)) +
   facet_grid(camper ~ ., margins=TRUE, scales="free_y")
 ```
   
-#### Zero Truncated Negative Binomial Models
+#### 7. Zero Truncated Negative Binomial Models
 
 A study of length of hospital stay, in days, as a function of age, kind of health insurance and whether or not the patient died while in the hospital. Length of hospital stay is recorded as a minimum of at least one day. The study consists of 1,493 observations. 
 
@@ -203,7 +230,7 @@ ggplot(newdata, aes(x = age, y = yhat, colour = hmo, fill = hmo))  +
   facet_wrap(~ died)
 '''  
 
-#### Tobit Regression
+#### 8. Tobit Regression
 
 ```{r}
 # function that gives the density of normal distribution
@@ -227,7 +254,7 @@ p + stat_bin(binwidth = 1) + stat_function(fun = f, size = 1, args = list(var = 
 # plot matrix
 ggpairs(dat[, c("read", "math", "apt")])
 ```
-#### Truncated Regression
+#### 9. Truncated Regression
 
 A study of students in a special GATE (gifted and talented education) program wishes to model achievement as a function of language skills and the type of program in which the student is currently enrolled. A major concern is that students are required to have a minimum achievement score of 40 to enter the special program. Thus, the sample is truncated at an achievement score of 40.
 
@@ -256,7 +283,7 @@ ggplot(dat, aes(prog, achiv)) +
 ```  
 
 
-#### Interval Regression
+#### 10. Interval Regression
 
 We wish to predict GPA from teacher ratings of effort, writing test scores and the type of program in which the student was enrolled (vocational, general or academic). The measure of GPA is a self-report response to the following item:
 
