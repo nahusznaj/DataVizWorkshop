@@ -95,3 +95,28 @@ Select the category that best represents your overall GPA.
 # bivariate plots
 ggpairs(dat[, -1], lower = list(combo = "box"), upper = list(combo = "blank"))
 ```
+#### Zero Truncated Negative Binomial Models
+
+```{r}
+output <- data.frame(resid = resid(m1)[, 1], fitted = fitted(m1))
+ggplot(output, aes(fitted, resid)) + geom_jitter(position = position_jitter(width = 0.25), 
+    alpha = 0.5) + stat_smooth(method = "loess")
+```
+
+````{r}
+ggplot(newdata, aes(x = age, y = yhat, colour = hmo))  +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ died)
+```
+```{r}
+## merge CIs with predicted values
+newdata <- cbind(newdata, yhat)
+
+## graph with CIs
+ggplot(newdata, aes(x = age, y = yhat, colour = hmo, fill = hmo))  +
+  geom_ribbon(aes(ymin = pLL, ymax = pUL), alpha = .25) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ died)
+'''  
