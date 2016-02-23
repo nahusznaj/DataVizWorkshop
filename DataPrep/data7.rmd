@@ -1,0 +1,20 @@
+Data Preparation 7
+=========================
+
+7. Zero-inflated Negative Binomial Regression  - Fishing.csv
+
+```{r}
+### Upload Fishing Data Set
+
+```
+
+
+
+```{r}
+## histogram with x axis in log10 scale
+ggplot(zinb, aes(count, fill = camper)) +
+  geom_histogram() +
+  scale_x_log10() +
+  facet_grid(camper ~ ., margins=TRUE, scales="free_y")
+
+```
