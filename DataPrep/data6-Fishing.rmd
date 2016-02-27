@@ -3,7 +3,7 @@
 
 ```{r}
 ## histogram with x axis in log10 scale
-ggplot(zinb, aes(count)) + geom_histogram() + scale_x_log10()
+ggplot(Fishing, aes(count)) + geom_histogram() + scale_x_log10()
 ```
 
 ```{r}
