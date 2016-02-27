@@ -1,5 +1,55 @@
 Facetting with ggplot
 ===========================================
+Facetting
+- Split into three subplots for each level of cylinder
+- Each row corresponds to a level of cylinder.
+```{r}
+qplot(mpg, wt, data=mtcars, facets= cyl~.,
+geom=c("point", "smooth"))
+```
+-  Three categories of cylinder : 4, 6 and 8
+
+#### Facetting (example 2)
+Using a linear regression model time
+```{r}
+qplot(mpg, wt, data=mtcars,
+ facets=cyl~.,
+ geom=c("point", "smooth"), method="lm")
+```
+#### Diamonds data set
+```{r}
+head(diamonds)
+```
+
+#### Different display of bar plots
+```{r}
+qplot(clarity, data=diamonds, geom="bar", fill=cut,
+position="stack")
+qplot(clarity, data=diamonds, geom="bar", fill=cut,
+position="dodge")
+qplot(clarity, data=diamonds, geom="bar", fill=cut,
+position="fill")
+qplot(clarity, data=diamonds, geom="bar", fill=cut,
+position="identity")
+```
+
+1. Stack
+2. Dodge
+3. Fill
+4. Identity 
+#### Frequency Polygons
+```{r}
+qplot(clarity, data=diamonds, geom="freqpoly",
+group=cut, colour=cut, position="identity")
+qplot(clarity, data=diamonds, geom="freqpoly",
+group=cut, colour=cut, position="stack")
+```
+#### Contingency table
+> table(diamonds$cut,diamonds$clarity)
+
+
+
+
 More on faceting
 ```{r}
 qplot(cty,data=Mpg2,geom="histogram",binwidth=2)
