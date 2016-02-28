@@ -25,10 +25,16 @@ head(diamonds)
 ```{r}
 qplot(clarity, data=diamonds, geom="bar", fill=cut,
 position="stack")
+``` 
+```{r} 
 qplot(clarity, data=diamonds, geom="bar", fill=cut,
 position="dodge")
+``` 
+```{r} 
 qplot(clarity, data=diamonds, geom="bar", fill=cut,
 position="fill")
+``` 
+```{r} 
 qplot(clarity, data=diamonds, geom="bar", fill=cut,
 position="identity")
 ```
@@ -37,16 +43,22 @@ position="identity")
 2. Dodge
 3. Fill
 4. Identity 
+
 #### Frequency Polygons
 ```{r}
 qplot(clarity, data=diamonds, geom="freqpoly",
 group=cut, colour=cut, position="identity")
+``` 
+```{r} 
 qplot(clarity, data=diamonds, geom="freqpoly",
 group=cut, colour=cut, position="stack")
 ```
 #### Contingency table
-> table(diamonds$cut,diamonds$clarity)
 
+```{r} 
+table(diamonds$cut,diamonds$clarity)
+
+``` 
 
 
 
@@ -56,18 +68,20 @@ qplot(cty,data=Mpg2,geom="histogram",binwidth=2)
 + facet_grid(cyl ~ drv)
 ```
 #### Margins
-Faceting a plot is like creating a contingency table.
-It is often useful to display marginal totals as well the individual cells
+Faceting a plot is like creating a contingency table. It is often useful to display marginal totals as well the individual cells
 
 #### Facet Wrap
-An alternative to the grid is a wrapped ribbon of plots, facet_wrap generates a long ribbon of plots, and wraps it into 2d.
+An alternative to the grid is a wrapped ribbon of plots, `facet_wrap()` generates a long ribbon of plots, and wraps it into 2d.
 
 #### Controlling scales
 For both types of faceting you can control whether or not the position scales are the same in all panels, or allowed to vary (i.e. are the scales
-“fixed” or “free”?) Fixed allows for us to compare subsets on an equal basis. It is the default
-setting.
+“fixed” or “free”?) Fixed allows for us to compare subsets on an equal basis. It is the default setting.
 Free allows us to examine each panel at the appropriate level of detail.
 To specify “free” scaling, we add the phrase “scales = free” to the
 `facet_grid()` or `facet_wrap()` commands.
 
-> qplot(cty,data=Mpg2,geom="histogram",binwidth=2) +   facet_grid(cyl ~ .,scales = "free")
+
+```{r}
+qplot(cty,data=Mpg2,geom="histogram",binwidth=2) +   facet_grid(cyl ~ .,scales = "free")
+
+``` 
