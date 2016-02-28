@@ -39,12 +39,16 @@ qplot(carat, price, data = diamonds, geom=c("point", "smooth"), method=lm)
  
  ``` 
 ```{r}
-qplot(carat, data = diamonds,â€¨  geom="histogram")
-qplot(carat, data = diamonds,â€¨  geom="histogram", binwidth = 1)
+qplot(carat, data = diamonds¨  geom="histogram")
+``` 
+```{r} 
+qplot(carat, data = diamonds¨  geom="histogram", binwidth = 1)
 ``` 
 ```{r}
-qplot(carat, data = diamonds,â€¨  geom="histogram", binwidth = 0.1)
-qplot(carat, data = diamonds,â€¨  geom="histogram", binwidth = 0.01)
+qplot(carat, data = diamonds¨  geom="histogram", binwidth = 0.1)
+``` 
+```{r} 
+qplot(carat, data = diamonds¨  geom="histogram", binwidth = 0.01)
  
  
 
@@ -54,7 +58,11 @@ qplot(carat, data = diamonds,â€¨  geom="histogram", binwidth = 0.01)
 ```{r} 
 d <- ggplot(diamonds, aes(x=carat, y=price))
 d + geom_point()
+``` 
+```{r} 
 d + geom_point(aes(colour = carat))
+``` 
+```{r} 
 d + geom_point(aes(colour = carat)) + scale_colour_brewer()
 ``` 
 ```{r} 
