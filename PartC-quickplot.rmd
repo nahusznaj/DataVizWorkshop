@@ -1,10 +1,10 @@
 Part C : Quickplot
 ==============================
-- The quickplot function (`qplot()`) function is supposed to make
-the same sort of plots as ggplot(), the main function offered by
+- The quickplot function `qplot()` is supposed to make
+the same sort of plots as `ggplot()`, the main function offered by
 the ggplot2 package, but with simpler syntax.
 
-We will look at `ggplot()` later on.
+
 - However, in practice, for more complex plots, it is probably more straightforward to use `ggplot()`.
 - Many of the arguments supplied to R’s plotting command `plot()` (e.g.
 main, xlab, ylab etc) can be supplied to `qplot()`, and processed the
@@ -14,6 +14,7 @@ same way.
 This data set was extracted from the 1974 Motor Trend US magazine, and
 comprises fuel consumption and 10 aspects of automobile design and
 performance for 32 automobiles (1973–74 models).
+
 **(Source: Henderson and Velleman (1981), Building multiple regression models interactively.
 Biometrics, 37, 391–411)**
 
@@ -36,7 +37,8 @@ Those familiar with the mtcars dataset would be aware of other (categorical )
 variables. For example
 - cyl : number of cylinders (4, 6 or 8?)
 - vs : (binary variable)
-- am : Transmission (0 = automatic, 1 = manual)
+- am : Transmission (0 = automatic, 1 = manual) 
+
 First we will subset by colour, using the am variable
 
 ```{r}
