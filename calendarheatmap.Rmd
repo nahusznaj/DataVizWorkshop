@@ -1,8 +1,10 @@
 Calendar Heatmap
-When you want to see the variation, especially the highs and lows, of a metric like stock price, on an actual calendar itself, the calendar heat map is a great tool. It emphasizes the variation visually over time rather than the actual value itself.
+=============================
+When you want to see the variation, especially the highs and lows, of a metric like stock price, on an actual calendar itself, the 
+calendar heat map is a great tool. It emphasizes the variation visually over time rather than the actual value itself.
 
-This can be implemented using the geom_tile. But getting it in the right format has more to do with the data preparation rather than the plotting itself.
-
+This can be implemented using the ``geom_tile``. But getting it in the right format has more to do with the data preparation rather than the plotting itself.
+<pre><code>
 # http://margintale.blogspot.in/2012/04/ggplot2-time-series-heatmaps.html
 library(ggplot2)
 library(plyr)
@@ -38,5 +40,5 @@ ggplot(df, aes(monthweek, weekdayf, fill = VIX.Close)) +
        title = "Time-Series Calendar Heatmap", 
        subtitle="Yahoo Closing Price", 
        fill="Close")
-Calendar Heatmap in Ggplot
+</code></pre>
 
