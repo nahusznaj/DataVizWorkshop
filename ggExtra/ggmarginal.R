@@ -1,10 +1,15 @@
+library(ggExtra)
+
 # basic usage
 p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg)) + ggplot2::geom_point()
 ggMarginal(p)
+
+
 # using some parameters
 set.seed(30)
 df <- data.frame(x = rnorm(500, 50, 10), y = runif(500, 0, 50))
 p2 <- ggplot2::ggplot(df, ggplot2::aes(x, y)) + ggplot2::geom_point()
+
 ggMarginal(p2)
 ggMarginal(p2, type = "histogram")
 ggMarginal(p2, margins = "x")
@@ -17,6 +22,8 @@ ggMarginal(p2, type = "histogram", bins = 10)
 ggMarginal(data = df, x = "x", y = "y")
 # more examples showing how the marginal plots are properly aligned even when
 # the main plot axis/margins/size/etc are changed
+
+
 set.seed(30)
 df2 <- data.frame(x = c(rnorm(250, 50, 10), rnorm(250, 100, 10)),
 y = runif(500, 0, 50))
