@@ -27,4 +27,4 @@ gg <- ggplot(health, aes(x=pct_2013, xend=pct_2014, y=Area, group=Area)) +
               legend.position="top",
               panel.border=element_blank())
 plot(gg)
-ggplot2 Dumbbell Chart
+
