@@ -1,19 +1,21 @@
 ggpval
 ===============================
 ggpval allows you to perform statistic tests and add the corresponding p-values to ggplots automatically. 
-P-values can be presented numerically or as stars (e.g. , *). 
+P-values can be presented numerically or as stars. 
 Alternatively, one can also make any text annotation between groups.
 
 ### Installation
 
-# Install `ggpval` from CRAN:
+
 ```{r}
+# Install `ggpval` from CRAN:
 install.packages("ggpval")
-```
+
 # You can install the lastest ggpval from github with:
 # install.packages("devtools")
 devtools::install_github("s6juncheng/ggpval")
-Example
+```
+### Example
 Simulate data with groups.
 
 ```{r}
@@ -26,7 +28,7 @@ G <- rep(c("G1", "G2"), each = 100)
 dt <- data.table(A, B, G)
 dt <- melt(dt, id.vars = "G")
 ```
-A trivial boxplot example
+### A trivial boxplot example
 Give the group pairs you want to compare in pairs.
 ```{r}
 plt <- ggplot(dt, aes(variable, value)) +
@@ -37,7 +39,7 @@ add_pval(plt, pairs = list(c(1, 2)))
 ```
 
 
-Boxplot with facets
+### Boxplot with facets
 ```{r}
 plt <- ggplot(dt, aes(variable, value)) +
   geom_boxplot() +
@@ -45,10 +47,12 @@ plt <- ggplot(dt, aes(variable, value)) +
   facet_wrap(~G)
 add_pval(plt, pairs = list(c(1, 2)))
 ```
-plot of chunk unnamed-chunk-4
+
 
 ### Bar plot
-ggpval tries to infer the column which contains the data to do statistical testing. In case this inference was wrong or not possible (for instance the raw data column was not mapped in ggplot object), you can specify the correct column name with response=.
+ggpval tries to infer the column which contains the data to do statistical testing. 
+In case this inference was wrong or not possible (for instance the raw data column was not mapped in
+ggplot object), you can specify the correct column name with response=.
 
 ```{r}
 dt[, mu := mean(value),
@@ -75,16 +79,14 @@ add_pval(plt_bar, pairs = list(c(1, 2)),
 ```
 
 ### Annotate your plot
+```{r}
 add_pval(plt, pairs = list(c(1, 2)), annotation = "Awesome")
-plot of chunk unnamed-chunk-7
+```
 
 In case you to want give different annotations to each facets, provide your annotation as a list
-
+```{r}
 add_pval(plt, pairs = list(c(1, 2)), annotation = list("Awesome1", "Awesome2"))
-plot of chunk unnamed-chunk-8
+```
 
 ### Bugs and issues
 Please report bugs and issues on github issue page: https://github.com/s6juncheng/ggpval/issues. Contributions are welcome.
-
-Acknowledgement
-Thanks to Vicente Yépez for testing and helping with improvement of the package.
