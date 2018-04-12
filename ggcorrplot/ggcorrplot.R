@@ -1,4 +1,5 @@
-Examples
+# Examples
+#########################################
 # Compute a correlation matrix
 data(mtcars)
 corr <- round(cor(mtcars), 1)
@@ -18,7 +19,7 @@ ggcorrplot(corr, hc.order = TRUE, outline.col = "white")
 # Types of correlogram layout
 # --------------------------------
 # Get the lower triangle
-4 ggcorrplot
+# 4 ggcorrplot
 ggcorrplot(corr, hc.order = TRUE, type = "lower",
 outline.col = "white")
 # Get the upeper triangle
@@ -28,9 +29,9 @@ outline.col = "white")
 # --------------------------------
 # Argument colors
 ggcorrplot(corr, hc.order = TRUE, type = "lower",
-outline.col = "white",
-ggtheme = ggplot2::theme_gray,
-colors = c("#6D9EC1", "white", "#E46726"))
+           outline.col = "white",
+           ggtheme = ggplot2::theme_gray,
+           colors = c("#6D9EC1", "white", "#E46726"))
 # Add correlation coefficients
 # --------------------------------
 # argument lab = TRUE
@@ -42,6 +43,7 @@ lab = TRUE)
 # Barring the no significant coefficient
 ggcorrplot(corr, hc.order = TRUE,
 type = "lower", p.mat = p.mat)
+
 # Leave blank on no significant coefficient
 ggcorrplot(corr, p.mat = p.mat, hc.order = TRUE,
 type = "lower", insig = "blank")
