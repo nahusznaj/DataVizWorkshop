@@ -1,43 +1,32 @@
 
-###################################################################
-# WVplots
-# Win-Vector Consulting LLC
-# Nina Zumel and John Mount
+## 1. WVplots
+* Win-Vector Consulting LLC
+* Nina Zumel and John Mount
+
+Plots created by WVplots are "ggplot" objects
+Therefore you can use the regular ggplot syntax with them.
+
+* ROC Cuves
+* Gain Curves
+* Shaded Density Plot
 
 
-### Exploratory Data Analysis with ggpairs
-
-# - from GGally R package
 
 
-###################################################################
-# GGally
+## 2. GGally
 
-### ggcoef
+* Exploratory Data Analysis with ggpairs
 
-# - visual representation for regression coefficient estimates for linear models.
-
-###################################################################
-# WVplots
-# Win-Vector Consulting LLC
-# Nina Zumel and John Mount
-
-### ROC Cuves
-
-### Gain Curves
-
-### Shaded Density Plot
-
-# Plots created by WVplots are "ggplot" objects
-# Therefore you can use the regular ggplot syntax with them.
-
-###################################################################
-# ggfortify
+* ggcoef - visual representation for regression coefficient estimates for linear models.
 
 
-###################################################################
-# ggmap
+## 3. ggfortify
 
-# Maps of Limerick
-# Adding Points
+## 4. ggalt
+
+
+## 4. ggmap
+
+* Maps of Limerick
+* Adding Points
 
