@@ -1,6 +1,6 @@
 ### ggalt: Extra Coordinate Systems, 'Geoms', Statistical Transformations, Scales and Fonts for 'ggplot2'
 
-A compendium of new geometries, coordinate systems, statistical transformations, scales and fonts for 'ggplot2', including 
+* A compendium of new geometries, coordinate systems, statistical transformations, scales and fonts for 'ggplot2', including 
 splines, 1d and 2d densities, univariate average shifted histograms, a new map coordinate system based on the 'PROJ.4'-library 
 along with geom_cartogram() that mimics the original functionality of geom_map(), formatters for "bytes", a stat_stepribbon() 
 function, increased 'plotly' compatibility and the 'StateFace' open source font 'ProPublica'. 
