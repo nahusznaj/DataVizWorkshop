@@ -1,5 +1,7 @@
-Cleveland Style Dotplots
+## Cleveland Style Dotplots
 set.seed(34903490)
+
+##################################################
 
 # discrete variable: letters of the alphabet
 # frequencies of letters in English
@@ -10,8 +12,14 @@ letterFreqs = c(8.167, 1.492, 2.782, 4.253, 12.702, 2.228,
 letterFreqs = letterFreqs/100
 letterFrame = data.frame(letter = letters, freq=letterFreqs)
 
+##################################################
+
 # now let's generate letters according to their letter frequencies
 N = 1000
-randomDraws = data.frame(draw=1:N, letter=sample(letterFrame$letter, size=N, replace=TRUE, prob=letterFrame$freq))
+randomDraws = data.frame(draw=1:N, 
+                         letter=sample(letterFrame$letter, size=N, 
+                                       replace=TRUE, prob=letterFrame$freq))
 
-WVPlots::ClevelandDotPlot(randomDraws, "letter", title = "Example Cleveland-style dot plot")
+##################################################
+
+ClevelandDotPlot(randomDraws, "letter", title = "Example Cleveland-style dot plot")
