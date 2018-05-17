@@ -13,11 +13,12 @@ added and the order in which they are added.
  We can define common aesthetics using the aes argument for this
 command.
 TOG and Dublin R ggplot2 workshop October 2012
-Aesthetics
+###Aesthetics
  Aesthetics are attributes that can be perceived on the graphic.
  Size, shape and colour are all examples of aesthetics.
  Each aesthetic can be mapped to a variable, or set to a constant value.
-Geoms
+
+###Geoms
 Points, lines and bars are all examples of geoms (geometric objects)
 Geom Named Plot
 point Scatter plot
@@ -25,7 +26,7 @@ point Bubble chart (relationship of size to variable)
 bar Bar chart
 boxplot Box-whisker plot
 line Line chart
-TOG and Dublin R ggplot2 workshop October 2012
+
 Geom_smooth
  Basic scatterplot seen previously. Add a “smooth” geom to the plot
  The “smooth” layer fits a smooth trend line through the data.
@@ -110,8 +111,8 @@ geom_ribbon() by default
 stat_smooth(geom="point") +
 stat_smooth(geom="errorbar")
 >
-TOG and Dublin R ggplot2 workshop October 2012
-Geoms and Stats
+
+### Geoms and Stats
  Geoms always have default statistics associated with them.
  Stats always have default geoms associated with them.
  Many are interchangeable (e.g. smooth and boxplot)
