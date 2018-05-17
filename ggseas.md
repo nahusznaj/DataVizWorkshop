@@ -13,29 +13,33 @@ I think it’s pretty stable now unless anyone identifies some bugs - I don’t 
 
 Travis-CI Build Status CRAN version CRAN RStudio mirror downloads
 
+### Installation 
 Installation can be done from CRAN:
-
+```{r}
 install.packages("ggseas")
+```
 Let’s go through the changes one at a time.
 
 Convert time series to data frame
-tsdf() is a new, very simple function that takes a ts or mts (univariate or multiple time series) object and converts it to a data frame that is then convenient for use with packages built around data frames, such as ggplot2 and dplyr. It’s super simple to use:
-
+``tsdf()`` is a new, very simple function that takes a ts or mts (univariate or multiple time series) object and converts it to a data frame that is then convenient for use with packages built around data frames, such as ggplot2 and dplyr. It’s super simple to use:
+```{r}
 ap_df <- tsdf(AirPassengers)
-Rolling averages and sums
-Rolling averages (usually rolling mean) and sums are commonly used, particularly for audiences that aren’t used to the greater sophistication of seasonal adjustment. It’s an inferior form of smoothing and comes from the days when seasonal adjustment and scatter plot smoothers weren’t readily available, but it’s still sometimes useful to be able to do this easily in a ggplot graphic. The stat_rollapplyr function does this, using the rollapplyr function from the zoo package under the hood. A width argument is mandatory, and FUN specifying which function to apply is optional (defaults to mean). There’s also an optional align function which defaults to the right; this means that the graphic shows the rolling average (or whatever other function) for the width number of observations up to the latest observation (alternatives are center or left).
+```
+### Rolling averages and sums
+Rolling averages (usually rolling mean) and sums are commonly used, particularly for audiences that aren’t used to the greater sophistication of seasonal adjustment. It’s an inferior form of smoothing and comes from the days when seasonal adjustment and scatter plot smoothers weren’t readily available, but it’s still sometimes useful to be able to do this easily in a ggplot graphic. The ``stat_rollapplyr`` function does this, using the ``rollapplyr`` function from the zoo package under the hood. A width argument is mandatory, and FUN specifying which function to apply is optional (defaults to mean). There’s also an optional align function which defaults to the right; this means that the graphic shows the rolling average (or whatever other function) for the width number of observations up to the latest observation (alternatives are center or left).
 
+```{r}
 ggplot(ldeaths_df, aes(x = YearMon, y = deaths)) +
    geom_point() +
    facet_wrap(~sex) +
    stat_rollapplyr(width = 12, FUN = median) +
    ggtitle("Lung deaths in the UK\n") +
    labs(x = "", y = "Deaths (including moving median")
-rolling
+```
 
-Deduce frequency from data
-If the variable that is mapped to the x axis is numeric (as will be the case if it was created with tsdf(), but not if it is of class Date) the functions in ggseas can now deduce the starting point of the time period and its frequency from the data. This makes it easier to just chuck in stat_seas() into your ggplot pipeline:
-
+### Deduce frequency from data
+If the variable that is mapped to the x axis is numeric (as will be the case if it was created with tsdf(), but not if it is of class Date) the functions in ggseas can now deduce the starting point of the time period and its frequency from the data. This makes it easier to just chuck in ``stat_seas()`` into your ggplot pipeline:
+```{r}
 ggplot(ldeaths_df, aes(x = YearMon, y = deaths, colour = sex)) +
    geom_point() +
    facet_wrap(~sex) +
@@ -44,18 +48,17 @@ ggplot(ldeaths_df, aes(x = YearMon, y = deaths, colour = sex)) +
    scale_y_continuous("Number of deaths", label = comma) +
    ggtitle("Seasonally adjusted lung deaths in the UK\n") +
    theme(legend.position = "none")
-simple-seas
-
+```
 Series can be converted to an index
 If you’re interested in trends including growth and other patterns over time rather than absolute levels, it can be useful to convert time series to an index. All the ggplot2-related functions in ggseas now offer arguments index.ref (to set the reference period - commonly but not always the first point, or an average of the first w points) and index.basis (what value to give the index in the reference period, usually 100, 1 or 1000).
-
+```{r}
 ggplot(ldeaths_df, aes(x = YearMon, y = deaths, colour = sex)) +
    stat_seas(index.ref = 1:12) +
    ggtitle("Indexed lung deaths in the UK\n") +
    labs(x = "", y = "Seasonally adjusted deaths\n(first 12 months average = 100\n") 
-index
+```
 
-Seasonal decomposition
+### Seasonal decomposition
 The biggest addition is the ability to easily do graphical decomposition of an original time series into trend, seasonal and irregular components, comparable to plot(stl()) or plot(decompose()) in base graphics but with the added access to X13-SEATS-ARIMA, and the ability to use the ggplot ethos to map a variable to colour and hence decompose several variables at once.
 
 This is done with the ggsdc() function, which produces an object of class ggplot with four facets. The user needs to specify the geom (normally geom_line). The image at the top of this post was produced with the code below. It expands on an example in the helpfile and uses Balance of Payments data from Statistics New Zealand, which has been included in the ggseas package for illustrative purposes.
