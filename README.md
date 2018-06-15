@@ -1,4 +1,4 @@
-DASI-Stats-MOOC
+Introduction to Data Visualization with R
 ===============
 
-Data Analysis and Statistical Inference MOOC
+Introduction to Data Visualization with R
