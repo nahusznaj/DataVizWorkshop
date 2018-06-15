@@ -4,11 +4,12 @@ The ggseas package for R, which provides convenient treatment of seasonal time s
 
 The improvements since I last blogged about ggseas include:
 
-added the convenience function tsdf() to convert a time series or multiple time series object easily into a data frame
-added stats for rolling functions (most likely to be rolling sums or averages of some sort)
-stats no longer need to be told the frequency and start date if the variable mapped to the x axis is numeric, but can deduce it from the data (thanks Christophe Sax for the idea and starting the code)
-series can be converted to an index (eg starting point = 100)
-added ggplot seasonal decomposition into trend, seasonal and irregular components, including for multiple series at once (thanks Paul Hendricks for the enhancement request)
+* added the convenience function tsdf() to convert a time series or multiple time series object easily into a data frame
+* added stats for rolling functions (most likely to be rolling sums or averages of some sort)
+* stats no longer need to be told the frequency and start date if the variable mapped to the x axis is numeric, but can deduce it from the data (thanks Christophe Sax for the idea and starting the code)
+* series can be converted to an index (eg starting point = 100)
+* added ggplot seasonal decomposition into trend, seasonal and irregular components, including for multiple series at once (thanks Paul Hendricks for the enhancement request)
+
 I think it’s pretty stable now unless anyone identifies some bugs - I don’t have any planned work on this for the immediate future.
 
 Travis-CI Build Status CRAN version CRAN RStudio mirror downloads
@@ -53,6 +54,7 @@ ggplot(ldeaths_df, aes(x = YearMon, y = deaths, colour = sex)) +
 ```
 Series can be converted to an index
 If you’re interested in trends including growth and other patterns over time rather than absolute levels, it can be useful to convert time series to an index. 
+
 All the ggplot2-related functions in ggseas now offer arguments ``index.ref`` (to set the reference period - commonly but not always the first point, or an average of the first w points) and index.basis (what value to give the index in the reference period, usually 100, 1 or 1000).
 ```{r}
 ggplot(ldeaths_df, aes(x = YearMon, y = deaths, colour = sex)) +
@@ -64,8 +66,8 @@ ggplot(ldeaths_df, aes(x = YearMon, y = deaths, colour = sex)) +
 ### Seasonal decomposition
 The biggest addition is the ability to easily do graphical decomposition of an original time series into trend, seasonal and irregular components, comparable to ``plot(stl())`` or ``plot(decompose())`` in base graphics but with the added access to X13-SEATS-ARIMA, and the ability to use the ggplot ethos to map a variable to colour and hence decompose several variables at once.
 
-This is done with the ggsdc() function, which produces an object of class ggplot with four facets. The user needs to specify the geom (normally geom_line). The image at the top of this post was produced with the code below. It expands on an example in the helpfile and uses Balance of Payments data from Statistics New Zealand, which has been included in the ggseas package for illustrative purposes.
-
+This is done with the ``ggsdc()`` function, which produces an object of class ggplot with four facets. The user needs to specify the geom (normally ``geom_line``). The image at the top of this post was produced with the code below. It expands on an example in the helpfile and uses Balance of Payments data from Statistics New Zealand, which has been included in the ggseas package for illustrative purposes.
+```{r}
 serv <- subset(nzbop, Account == "Current account" & 
                   Category %in% c("Services; Exports total", "Services; Imports total"))
                   
@@ -79,8 +81,11 @@ ggsdc(serv, aes(x = TimePeriod, y = Value, colour = Category),
 
    grid.text("Source: Statistics New Zealand, Balance of Payments", 0.7, 0.03,
           gp = gpar(fontfamily = "myfont", fontface = "italic", cex = 0.7))   
+```
 ### Conclusion
-ggseas aims to make it easier and quicker to incorporate seasonal adjustment, including with the professional standard X13-SEATS-ARIMA algorithms, into exploratory work flows. It does this by letting you incorporate seasonally adjusted variables into graphics with multiple series (dimensions mapped to facets or to colour), and by letting you simultaneously decompose and plot on the same graphic at once several related series. Adding indexing, rolling averages or sums, and quick conversion from ts to data.frame to the toolbox is part of the same idea, making it easier to do exploratory data analysis with many time series at once.
+ggseas aims to make it easier and quicker to incorporate seasonal adjustment, including with the professional standard X13-SEATS-ARIMA algorithms, into exploratory work flows. It does this by letting you incorporate seasonally adjusted variables into graphics with multiple series (dimensions mapped to facets or to colour), and by letting you simultaneously decompose and plot on the same graphic at once several related series. 
+
+Adding indexing, rolling averages or sums, and quick conversion from ts to data.frame to the toolbox is part of the same idea, making it easier to do exploratory data analysis with many time series at once.
 
 All the functions mentioned above have helpfiles that are more comprehensive than the examples can show.
 
