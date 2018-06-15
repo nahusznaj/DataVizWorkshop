@@ -9,37 +9,40 @@ Until the new version of ggplot2 is out, which is soon, you need to do the follo
 This link should work: https://ftp.heanet.ie/mirrors/cran.r-project.org/bin/windows/base/old/
 
 If it doesn't, here are the steps.
-a. go to "https://www.r-project.org/"
-b. At the top of the page, where it says "To download R, please choose your preferred CRAN mirror." - click the link and select Ireland
-c. You should see options to download R for various operating systems.  Click on your choice.
-d. Click on "base" subdirectory
-e. click on "Previous Releases" of R for Windows (down at the bottom)
-f. Select version 3.4.4
 
- *** WARNING: DO NOT INSTALL ggplot2 Yet!! ***
+* 1.  go to "https://www.r-project.org/"
+* 2.  At the top of the page, where it says "To download R, please choose your preferred CRAN mirror." - click the link and select Ireland
+* 3. You should see options to download R for various operating systems.  Click on your choice.
+* 4. Click on "base" subdirectory
+* 5. click on "Previous Releases" of R for Windows (down at the bottom)
+* 6. Select version 3.4.4
+
+#### WARNING: DO NOT INSTALL ggplot2 Yet!! 
 
 ## 2. Install the devtools library
 
 Run the following code:
 
- <pre><code>  
- install.packages("devtools")
- library(devtools)
- </code><pre>
+<pre><code>  
+install.packages("devtools")
+library(devtools)
+</code></pre>
 
- ***WARNING: DO NOT INSTALL ggplot2 Yet!!***
+#### WARNING: DO NOT INSTALL ggplot2 Yet!!
 
 ## 3. Install the development version of ggplot2
 
 Run the following code:
- <pre><code>
- install_github('tidyverse/ggplot2')
- library(ggplot2)
- </code></pre>
+
+<pre><code>
+install_github('tidyverse/ggplot2')
+library(ggplot2)
+</code></pre>
 
 ## 4. To check everything went ok, run the following code
+
 <pre><code>
- ls("package:ggplot2")
+ls("package:ggplot2")
 </code></pre>
 
 If the following output includes ``geom_sf``, then the installation was successful.
