@@ -43,11 +43,4 @@ A compendium of new geometries, coordinate systems, statistical transformations,
 
 Further new functionality includes lollipop charts, dumbbell charts, the ability to encircle points and coordinate-system-based text annotations.
 
-## 5. ggLikert
-
-
-## 6. ggmap
-
-* Maps of Limerick
-* Adding Points
 
