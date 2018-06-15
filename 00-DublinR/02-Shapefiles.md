@@ -1,0 +1,25 @@
+Hi folks,
+I plan to show off a bit on shapefiles (map files essentially), and how to use them for presenting info.
+
+The shapefile was taken from 
+<pre><code>
+# 1. R package "sf" - Simple Features 
+install.packages("sf")
+library(sf)
+
+# 2. Download the Irish Counties Map File
+
+download.file("http://biogeo.ucdavis.edu/data/diva/adm/IRL_adm.zip",
+              destfile = "counties.zip")
+
+# Unzip it. Check your work directory to check it is ok
+unzip("counties.zip")
+
+# 3. Read the data into R
+counties <- sf::read_sf("IRL_adm1.shp")
+
+# 4. Lets have a look at what we got.
+head(counties)
+class(counties)
+</code></pre>
+
