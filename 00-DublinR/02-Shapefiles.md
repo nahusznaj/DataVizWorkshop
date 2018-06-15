@@ -1,7 +1,7 @@
 Hi folks,
 I plan to show off a bit on shapefiles (map files essentially), and how to use them for presenting info.
 
-The shapefile was taken from 
+The shapefile was taken from this website:  http://www.diva-gis.org/Data
 <pre><code>
 # 1. R package "sf" - Simple Features 
 install.packages("sf")
