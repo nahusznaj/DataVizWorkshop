@@ -21,5 +21,11 @@ counties <- sf::read_sf("IRL_adm1.shp")
 # 4. Lets have a look at what we got.
 head(counties)
 class(counties)
+
+# 5. Lets do the same for USA Data 
+download.file("http://biogeo.ucdavis.edu/data/diva/adm/USA_adm.zip", 
+               destfile = "USAmap.zip")
+unzip("USAmap.zip")               
+
 </code></pre>
 
